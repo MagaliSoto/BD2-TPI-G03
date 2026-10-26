@@ -1,0 +1,146 @@
+<mxfile host="app.diagrams.net" agent="M365 Copilot">
+  <diagram id="der-vetados-v2" name="DER actualizado">
+    <mxGraphModel dx="1648" dy="910" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontStyle=1;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(170, 200, 232));&quot;&gt;DER | Gestión de personas vetadas y control de acceso&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="1440" x="180" y="18" as="geometry" />
+        </mxCell>
+        <mxCell id="persona" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(101, 185, 168); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;PERSONA_VETADA&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_persona&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(100)&lt;/span&gt;nombre&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(100)&lt;/span&gt;apellido&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARCHAR(20)&lt;/span&gt;documento  [UQ]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARBINARY(MAX)&lt;/span&gt;referencia_facial&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATETIME2(0)&lt;/span&gt;fecha_alta&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="192" width="230" x="30" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="pi" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(153, 152, 209); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;PERSONA_INCIDENTE&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK, FK id_persona&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK, FK id_incidente&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="92" width="225" x="310" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="incidente" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(199, 134, 71); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;INCIDENTE&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_incidente&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_tienda&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_tipo_incidente&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_usuario&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATETIME2(0)&lt;/span&gt;fecha_hora&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(2000)&lt;/span&gt;descripcion&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="192" width="235" x="585" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="tipo_inc" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(216, 161, 94); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;TIPO_INCIDENTE&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_tipo_incidente&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(100)&lt;/span&gt;nombre  [UQ]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(500)&lt;/span&gt;descripcion&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="117" width="220" x="870" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="tienda" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(124, 167, 221); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;TIENDA&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_tienda&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(100)&lt;/span&gt;nombre&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(250)&lt;/span&gt;direccion&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="117" width="220" x="1140" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="usuario_tienda" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(169, 176, 186); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;USUARIO_TIENDA&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_usuario_tienda&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_usuario&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_tienda&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATE&lt;/span&gt;fecha_desde&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATE&lt;/span&gt;fecha_hasta [NULL = vigente]&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="167" width="235" x="1410" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="veto" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(193, 131, 168); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;VETO&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_veto&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_persona&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_usuario&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_incidente [NULL]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_tienda [NULL = todas]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATE&lt;/span&gt;fecha_inicio&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATE&lt;/span&gt;fecha_fin  [NULL permitido]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARCHAR(20)&lt;/span&gt;estado&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(500)&lt;/span&gt;motivo&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="267" width="250" x="30" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="evento" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family: Arial, sans-serif;&quot;&gt;&lt;div style=&quot;background: rgb(85, 171, 192); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;EVENTO_DETECCION&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_evento&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_persona&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_tienda&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_usuario_revisor [NULL]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATETIME2(0)&lt;/span&gt;fecha_hora&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DECIMAL(5,4)&lt;/span&gt;nivel_confianza&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARBINARY(MAX)&lt;/span&gt;referencia_captura&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARCHAR(20)&lt;/span&gt;estado_revision&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATETIME2(0)&lt;/span&gt;fecha_revision [NULL]&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="267" width="270" x="330" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="historial" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(208, 113, 113); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;HISTORIAL_VETO&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_historial&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_veto [NULL]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_usuario&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARCHAR(10)&lt;/span&gt;accion&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;DATETIME2(0)&lt;/span&gt;fecha_hora&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(MAX)&lt;/span&gt;datos_anteriores&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(MAX)&lt;/span&gt;datos_nuevos&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="217" width="260" x="650" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="usuario" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(156, 163, 175); font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;USUARIO&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_usuario&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;FK id_rol&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(100)&lt;/span&gt;nombre&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARCHAR(254)&lt;/span&gt;email  [UQ]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;VARCHAR(255)&lt;/span&gt;hash_contrasena&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="167" width="235" x="1020" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="rol" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#182E3E;strokeColor=#FFFFFF;strokeWidth=2;align=left;verticalAlign=top;spacing=0;overflow=fill;fontColor=#FFFFFF;labelBackgroundColor=none;" value="&lt;div style=&quot;font-family:Arial,sans-serif&quot;&gt;&lt;div style=&quot;background: rgb(185, 189, 197); font-weight: bold; font-size: 14px; padding: 10px;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;ROL&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;INT&lt;/span&gt;PK id_rol&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(50)&lt;/span&gt;nombre  [UQ]&lt;/div&gt;&lt;div style=&quot;padding: 4px 9px; border-top: 1px solid rgb(52, 56, 61); font-size: 12px;&quot;&gt;&lt;span style=&quot;float:right;&quot;&gt;NVARCHAR(500)&lt;/span&gt;descripcion&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="117" width="210" x="1300" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="pi" value="1 a 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="pi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="incidente" value="0..N a 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="incidente" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.45;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="tipo_inc" value="0..N a 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="incidente" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="tienda" value="0..N a 1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="229" />
+              <mxPoint x="980" y="230" />
+              <mxPoint x="1140" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.22;entryY=0;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="veto" value="1 a 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="persona" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0.78;exitY=1;exitDx=0;exitDy=0;entryX=0.12;entryY=0;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="evento" value="1 a 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="tienda" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="evento" value="1 a 0..N">
+          <mxGeometry relative="1" x="-0.021" as="geometry">
+            <Array as="points">
+              <mxPoint x="1217" y="370" />
+              <mxPoint x="532.5" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0.05;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="incidente" value="1 a 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0;exitY=0.38;exitDx=0;exitDy=0;entryX=1;entryY=0.58;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="veto" value="1 a 0..N">
+          <mxGeometry relative="1" x="-0.0208" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="740" />
+              <mxPoint x="280" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0;exitY=0.22;exitDx=0;exitDy=0;entryX=1;entryY=0.72;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="evento" value="1 a 0..N revisados">
+          <mxGeometry relative="1" x="-0.2382" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="456.7" />
+              <mxPoint x="940" y="670" />
+              <mxPoint x="610" y="670" />
+              <mxPoint x="610" y="592.2" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.45;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="rol" value="0..N a 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0.72;exitY=0;exitDx=0;exitDy=0;entryX=0.35;entryY=1;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="usuario_tienda" value="1 a 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="tienda" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="usuario_tienda" value="1 a 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="veto" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="historial" value="1 a 0..N">
+          <mxGeometry relative="1" x="-0.5322" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="463.4" />
+              <mxPoint x="300" y="710" />
+              <mxPoint x="630" y="710" />
+              <mxPoint x="630" y="474.3" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="usuario" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;exitX=0;exitY=0.72;exitDx=0;exitDy=0;entryX=1;entryY=0.68;entryDx=0;entryDy=0;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;" target="historial" value="1 a 0..N acciones">
+          <mxGeometry relative="1" x="-0.3176" as="geometry">
+            <Array as="points">
+              <mxPoint x="990" y="540.2" />
+              <mxPoint x="990" y="600" />
+              <mxPoint x="910" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="incidente" target="veto" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.33;entryDx=0;entryDy=0;" value="1 a 0..N origina">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="608" y="310" />
+              <mxPoint x="305" y="310" />
+              <mxPoint x="305" y="508" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="tienda" target="veto" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#23445D;strokeWidth=1.5;endArrow=none;startArrow=none;fontColor=default;fontSize=11;fontStyle=1;labelBackgroundColor=none;dashed=1;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" value="0..1 a 0..N (veto por tienda)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1173" y="390" />
+              <mxPoint x="1000" y="390" />
+              <mxPoint x="1000" y="770" />
+              <mxPoint x="155" y="770" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
