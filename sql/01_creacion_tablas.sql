@@ -106,15 +106,15 @@ GO
 
 /* ---------------------------------------------------------------------
    PERSONA_VETADA: base central de personas con al menos un incidente.
-   referencia_facial guarda el vector/plantilla que usa el motor de
-   inferencia para reconocer a la persona.
+   La base no guarda datos biométricos (embeddings): el reconocimiento
+   facial lo resuelve el motor de inferencia por fuera de la base, que
+   solo registra a qué persona detectó en cada evento.
    --------------------------------------------------------------------- */
 CREATE TABLE PERSONA_VETADA (
     id_persona         INT IDENTITY(1,1) NOT NULL,
     nombre             NVARCHAR(100)     NOT NULL,
     apellido           NVARCHAR(100)     NOT NULL,
     documento          VARCHAR(20)       NOT NULL,
-    referencia_facial  VARBINARY(MAX)    NOT NULL,
     fecha_alta         DATETIME2(0)      NOT NULL CONSTRAINT DF_PERSONA_VETADA_fecha_alta DEFAULT (SYSDATETIME()),
     CONSTRAINT PK_PERSONA_VETADA PRIMARY KEY (id_persona),
     CONSTRAINT UQ_PERSONA_VETADA_documento UNIQUE (documento),

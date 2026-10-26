@@ -24,6 +24,7 @@ La base de datos da soporte a un sistema que controla el ingreso de personas vet
 - **Origen del veto.** `VETO.id_incidente` indica qué incidente originó el veto.
 - **Vigencia del veto.** Un veto está vigente si su estado es `ACTIVO` y su `fecha_fin` es `NULL` (tiempo indeterminado) o posterior a hoy. Los vetos no se borran: al eliminarlos pasan a `LEVANTADO` (baja lógica).
 - **Historial de asignaciones de usuarios a tiendas.** `USUARIO_TIENDA` tiene su propia clave (`id_usuario_tienda`), así un usuario puede ser asignado varias veces a la misma tienda en distintos períodos. `fecha_hasta` en `NULL` indica que la asignación está vigente. Un índice único filtrado impide que el mismo usuario tenga dos asignaciones vigentes a la misma tienda.
+- **Sin datos biométricos.** La base no guarda embeddings ni plantillas faciales: el reconocimiento lo resuelve el motor de inferencia por fuera, y la base solo registra a qué persona detectó en cada evento.
 - **Auditoría.** `HISTORIAL_VETO` guarda cada alta, baja y modificación de un veto, con los datos anteriores y nuevos en formato JSON.
 
 ## Diagrama de entidad-relación

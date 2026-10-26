@@ -88,22 +88,20 @@ INSERT INTO TIPO_INCIDENTE (nombre, descripcion) VALUES
 
 /* ---------------------------------------------------------------------
    PERSONA_VETADA
-   referencia_facial: valor de ejemplo (en el sistema real es la
-   plantilla biométrica que genera el motor de inferencia).
    --------------------------------------------------------------------- */
-INSERT INTO PERSONA_VETADA (nombre, apellido, documento, referencia_facial, fecha_alta) VALUES
- (N'Julián',   N'Acosta',    '30111222', HASHBYTES('SHA2_512', 'facial-30111222'), DATEADD(DAY, -420, @base)), -- 1
- (N'Romina',   N'Benítez',   '28333444', HASHBYTES('SHA2_512', 'facial-28333444'), DATEADD(DAY, -300, @base)), -- 2
- (N'Hernán',   N'Castro',    '35555666', HASHBYTES('SHA2_512', 'facial-35555666'), DATEADD(DAY, -250, @base)), -- 3
- (N'Lucas',    N'Domínguez', '36777888', HASHBYTES('SHA2_512', 'facial-36777888'), DATEADD(DAY, -250, @base)), -- 4
- (N'Valeria',  N'Escobar',   '27999000', HASHBYTES('SHA2_512', 'facial-27999000'), DATEADD(DAY, -200, @base)), -- 5
- (N'Gustavo',  N'Ferreyra',  '25123456', HASHBYTES('SHA2_512', 'facial-25123456'), DATEADD(DAY, -150, @base)), -- 6
- (N'Natalia',  N'Giménez',   '38234567', HASHBYTES('SHA2_512', 'facial-38234567'), DATEADD(DAY, -120, @base)), -- 7
- (N'Pablo',    N'Herrera',   '31345678', HASHBYTES('SHA2_512', 'facial-31345678'), DATEADD(DAY,  -75, @base)), -- 8
- (N'Micaela',  N'Ibarra',    '40456789', HASHBYTES('SHA2_512', 'facial-40456789'), DATEADD(DAY,  -60, @base)), -- 9
- (N'Sebastián',N'Juárez',    '33567890', HASHBYTES('SHA2_512', 'facial-33567890'), DATEADD(DAY,  -45, @base)), -- 10
- (N'Florencia',N'Ledesma',   '37678901', HASHBYTES('SHA2_512', 'facial-37678901'), DATEADD(DAY,  -30, @base)), -- 11
- (N'Ezequiel', N'Molina',    '39789012', HASHBYTES('SHA2_512', 'facial-39789012'), DATEADD(DAY,  -20, @base)); -- 12
+INSERT INTO PERSONA_VETADA (nombre, apellido, documento, fecha_alta) VALUES
+ (N'Julián',   N'Acosta',    '30111222', DATEADD(DAY, -420, @base)), -- 1
+ (N'Romina',   N'Benítez',   '28333444', DATEADD(DAY, -300, @base)), -- 2
+ (N'Hernán',   N'Castro',    '35555666', DATEADD(DAY, -250, @base)), -- 3
+ (N'Lucas',    N'Domínguez', '36777888', DATEADD(DAY, -250, @base)), -- 4
+ (N'Valeria',  N'Escobar',   '27999000', DATEADD(DAY, -200, @base)), -- 5
+ (N'Gustavo',  N'Ferreyra',  '25123456', DATEADD(DAY, -150, @base)), -- 6
+ (N'Natalia',  N'Giménez',   '38234567', DATEADD(DAY, -120, @base)), -- 7
+ (N'Pablo',    N'Herrera',   '31345678', DATEADD(DAY,  -75, @base)), -- 8
+ (N'Micaela',  N'Ibarra',    '40456789', DATEADD(DAY,  -60, @base)), -- 9
+ (N'Sebastián',N'Juárez',    '33567890', DATEADD(DAY,  -45, @base)), -- 10
+ (N'Florencia',N'Ledesma',   '37678901', DATEADD(DAY,  -30, @base)), -- 11
+ (N'Ezequiel', N'Molina',    '39789012', DATEADD(DAY,  -20, @base)); -- 12
 
 /* ---------------------------------------------------------------------
    INCIDENTE  (fecha = hace N días a las 15:00 / 18:00 / 11:00)
