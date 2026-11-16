@@ -72,3 +72,115 @@ SELECT
     (SELECT COUNT(*)
      FROM dbo.INCIDENTE) AS TotalEnTabla;
 GO
+/*
+   Pruebas de triggers - Cristian Tesaglio
+   Correr después de las pruebas de funciones y vistas (modifican datos).
+   Los resultados esperados corresponden a los datos de ejemplo.
+   */
+
+/* ---------- 1) trg_VETO_alta ---------- */
+
+-- Éxito: Lucas Domínguez (4) no tiene veto vigente. Se le aplica uno en Palermo.
+-- Esperamos el veto nuevo y un ALTA en HISTORIAL_VETO con los datos en JSON.
+INSERT INTO VETO (id_persona, id_usuario, id_incidente, id_tienda, fecha_inicio, fecha_fin, motivo)
+VALUES (4, 2, NULL, 2, CAST(GETDATE() AS DATE), DATEADD(DAY, 90, CAST(GETDATE() AS DATE)),
+        N'Prueba de trigger: veto de 90 días en Sucursal Palermo.');
+
+SELECT TOP 1 * FROM HISTORIAL_VETO ORDER BY id_historial DESC;
+GO
+
+-- Éxito: Hernán Castro (3) está vetado solo en Centro, así que en Palermo se puede.
+INSERT INTO VETO (id_persona, id_usuario, id_incidente, id_tienda, fecha_inicio, fecha_fin, motivo)
+VALUES (3, 2, NULL, 2, CAST(GETDATE() AS DATE), NULL,
+        N'Prueba de trigger: veto en Palermo, no se pisa con el de Centro.');
+
+SELECT * FROM VETO WHERE id_persona = 3 ORDER BY id_veto;
+GO
+
+-- Error: Romina Benítez (2) ya tiene un veto global por tiempo indeterminado.
+-- Es el caso del incidente 13: el trigger tiene que rechazarlo.
+BEGIN TRY
+    INSERT INTO VETO (id_persona, id_usuario, id_incidente, id_tienda, fecha_inicio, fecha_fin, motivo)
+    VALUES (2, 3, 13, 4, CAST(GETDATE() AS DATE), NULL,
+            N'Prueba de trigger: debería rechazarse.');
+END TRY
+BEGIN CATCH
+    PRINT 'Error esperado: ' + ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- Error: Hernán Castro (3) tiene veto en Centro; uno para toda la empresa lo incluye.
+BEGIN TRY
+    INSERT INTO VETO (id_persona, id_usuario, id_incidente, id_tienda, fecha_inicio, fecha_fin, motivo)
+    VALUES (3, 2, NULL, NULL, CAST(GETDATE() AS DATE), NULL,
+            N'Prueba de trigger: debería rechazarse.');
+END TRY
+BEGIN CATCH
+    PRINT 'Error esperado: ' + ERROR_MESSAGE();
+END CATCH;
+
+-- No se tiene que haber guardado ninguno de los dos rechazados.
+-- Esperamos 1 veto para la persona 2 y 2 para la persona 3.
+SELECT
+    (SELECT COUNT(*) FROM VETO WHERE id_persona = 2) AS VetosRomina,
+    (SELECT COUNT(*) FROM VETO WHERE id_persona = 3) AS VetosHernan;
+GO
+
+/* ---------- 2) trg_EVENTO_DETECCION_descarte ---------- */
+
+-- Insertamos 4 detecciones juntas:
+--   a) Valeria Escobar (5) en Centro: su veto está levantado      -> DESCARTADO
+--   b) Micaela Ibarra (9) en Palermo: su veto es solo de Caballito -> DESCARTADO
+--   c) Romina Benítez (2) en Centro con confianza 0.55             -> DESCARTADO
+--   d) Romina Benítez (2) en Centro con confianza 0.97             -> PENDIENTE
+INSERT INTO EVENTO_DETECCION (id_persona, id_tienda, nivel_confianza, referencia_captura) VALUES
+ (5, 1, 0.9500, HASHBYTES('SHA2_256', 'prueba-trigger-a')),
+ (9, 2, 0.9300, HASHBYTES('SHA2_256', 'prueba-trigger-b')),
+ (2, 1, 0.5500, HASHBYTES('SHA2_256', 'prueba-trigger-c')),
+ (2, 1, 0.9700, HASHBYTES('SHA2_256', 'prueba-trigger-d'));
+
+SELECT TOP 4 id_evento, id_persona, id_tienda, nivel_confianza,
+       estado_revision, id_usuario_revisor, fecha_hora, fecha_revision
+FROM EVENTO_DETECCION
+ORDER BY id_evento DESC;
+GO
+
+/* ---------- 3) trg_VETO_baja_logica ---------- */
+
+-- Florencia Ledesma (11) tiene el veto 12 vigente en toda la empresa.
+-- Lo "borra" el administrador (1), indicado por SESSION_CONTEXT.
+-- Antes: ACTIVO y fn_veto_vigente = 1.
+SELECT id_veto, estado, fecha_fin, dbo.fn_veto_vigente(11, 1) AS VigenteEnCentro
+FROM VETO WHERE id_veto = 12;
+
+EXEC sp_set_session_context N'id_usuario', 1;
+DELETE FROM VETO WHERE id_veto = 12;
+EXEC sp_set_session_context N'id_usuario', NULL;
+
+-- Después: la fila sigue existiendo, LEVANTADO con fecha_fin = hoy y fn_veto_vigente = 0.
+SELECT id_veto, estado, fecha_fin, dbo.fn_veto_vigente(11, 1) AS VigenteEnCentro
+FROM VETO WHERE id_veto = 12;
+
+-- Un solo registro BAJA hecho por el usuario 1 (no se duplica como MODIF).
+SELECT * FROM HISTORIAL_VETO WHERE id_veto = 12 ORDER BY id_historial;
+GO
+
+/* ---------- 4) trg_VETO_modificacion (bonus) ---------- */
+
+-- Se extiende 60 días el veto 10 (Micaela Ibarra, Caballito).
+-- Esperamos un MODIF con la fila completa antes y después.
+UPDATE VETO
+SET fecha_fin = DATEADD(DAY, 60, fecha_fin),
+    motivo    = N'Hurtos reiterados en Sucursal Caballito. Veto extendido 60 días.'
+WHERE id_veto = 10;
+
+SELECT * FROM HISTORIAL_VETO WHERE id_veto = 10 ORDER BY id_historial;
+GO
+
+-- Un UPDATE que no cambia nada no tiene que generar auditoría.
+-- Esperamos la misma cantidad antes y después.
+DECLARE @antes INT = (SELECT COUNT(*) FROM HISTORIAL_VETO WHERE id_veto = 10);
+UPDATE VETO SET motivo = motivo WHERE id_veto = 10;
+SELECT @antes AS RegistrosAntes,
+       (SELECT COUNT(*) FROM HISTORIAL_VETO WHERE id_veto = 10) AS RegistrosDespues;
+GO
