@@ -87,5 +87,5 @@ Todos los usuarios de prueba tienen la contraseña `1234` (guardada como hash SH
 
 ## Links
 
-- Documento final (PDF): _pendiente_
-- Video de demostración: _pendiente_
+- Documento final (PDF): [docs/TPI_BD2_Equipo03.pdf](docs/TPI_BD2_Equipo03.pdf)
+- Video de demostración: [carpeta en Google Drive](https://drive.google.com/drive/folders/1FtPNP4MOpfHA2YxwDscw1b6a64ro35ax?usp=sharing)
