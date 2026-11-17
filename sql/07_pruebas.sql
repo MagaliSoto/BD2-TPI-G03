@@ -184,3 +184,180 @@ UPDATE VETO SET motivo = motivo WHERE id_veto = 10;
 SELECT @antes AS RegistrosAntes,
        (SELECT COUNT(*) FROM HISTORIAL_VETO WHERE id_veto = 10) AS RegistrosDespues;
 GO
+/* =====================================================================
+   Pruebas de procedimientos almacenados - Evelyn Baini
+   ===================================================================== */
+
+-- 1. Prueba exitosa de sp_reporte_detecciones
+-- Consultar detecciones de la tienda 2 con confianza >= 0.9000.
+
+EXEC dbo.sp_reporte_detecciones
+    @id_tienda = 2,
+    @desde = '2026-01-01',
+    @hasta = '2026-12-31T23:59:59',
+    @confianza_min = 0.9000;
+GO
+
+-- 2. Prueba de error: fechas incorrectas
+
+BEGIN TRY
+    EXEC dbo.sp_reporte_detecciones
+        @id_tienda = 2,
+        @desde = '2026-12-31',
+        @hasta = '2026-01-01',
+        @confianza_min = 0.9000;
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- 3. Prueba de error: confianza fuera de rango
+
+BEGIN TRY
+    EXEC dbo.sp_reporte_detecciones
+        @id_tienda = 2,
+        @desde = '2026-01-01',
+        @hasta = '2026-12-31',
+        @confianza_min = 1.5000;
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- 4. Prueba de error: tienda inexistente
+
+BEGIN TRY
+    EXEC dbo.sp_reporte_detecciones
+        @id_tienda = -1,
+        @desde = '2026-01-01',
+        @hasta = '2026-12-31',
+        @confianza_min = 0.9000;
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- 5. Prueba de error: usuario no autorizado
+
+BEGIN TRY
+    EXEC dbo.sp_registrar_incidente
+        @id_usuario = -1,
+        @id_tienda = 2,
+        @id_tipo_incidente = 1,
+        @nombre = 'Persona',
+        @apellido = 'Prueba',
+        @documento = '99999999',
+        @descripcion = 'Prueba de usuario no autorizado',
+        @motivo = 'Prueba de validacion',
+        @fecha_fin = '2026-12-31',
+        @id_tienda_veto = 2;
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- 6. Prueba de error: tipo de incidente inexistente
+
+BEGIN TRY
+    EXEC dbo.sp_registrar_incidente
+        @id_usuario = 2,
+        @id_tienda = 2,
+        @id_tipo_incidente = -1,
+        @nombre = 'Persona',
+        @apellido = 'Prueba',
+        @documento = '99999999',
+        @descripcion = 'Prueba de tipo de incidente inexistente',
+        @motivo = 'Prueba de validacion',
+        @fecha_fin = '2026-12-31',
+        @id_tienda_veto = 2;
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- 7. Prueba de error: tienda del veto inexistente
+
+BEGIN TRY
+    EXEC dbo.sp_registrar_incidente
+        @id_usuario = 2,
+        @id_tienda = 2,
+        @id_tipo_incidente = 1,
+        @nombre = 'Persona',
+        @apellido = 'Prueba',
+        @documento = '99999999',
+        @descripcion = 'Prueba de tienda del veto inexistente',
+        @motivo = 'Prueba de validacion',
+        @fecha_fin = '2026-12-31',
+        @id_tienda_veto = -1;
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- 8. Prueba exitosa de registro de incidente y veto
+-- Mostrar datos antes y despues.
+-- Deshacer los cambios al terminar.
+
+SELECT *
+FROM dbo.PERSONA_VETADA
+WHERE documento = '88888888';
+
+BEGIN TRY
+    BEGIN TRANSACTION;
+
+    EXEC dbo.sp_registrar_incidente
+        @id_usuario = 2,
+        @id_tienda = 2,
+        @id_tipo_incidente = 1,
+        @nombre = 'Persona',
+        @apellido = 'Demostracion',
+        @documento = '88888888',
+        @descripcion = 'Prueba exitosa de registro',
+        @motivo = 'Hurto de mercaderia',
+        @fecha_fin = '2026-12-31',
+        @id_tienda_veto = 2;
+
+    -- persona registrada
+    SELECT *
+    FROM dbo.PERSONA_VETADA
+    WHERE documento = '88888888';
+
+    -- incidente registrado
+    SELECT I.*
+    FROM dbo.INCIDENTE I
+    INNER JOIN dbo.PERSONA_INCIDENTE PI
+        ON I.id_incidente = PI.id_incidente
+    INNER JOIN dbo.PERSONA_VETADA P
+        ON PI.id_persona = P.id_persona
+    WHERE P.documento = '88888888';
+
+    -- veto registrado
+    SELECT V.*
+    FROM dbo.VETO V
+    INNER JOIN dbo.PERSONA_VETADA P
+        ON V.id_persona = P.id_persona
+    WHERE P.documento = '88888888';
+
+    IF @@TRANCOUNT > 0
+        ROLLBACK TRANSACTION;
+
+END TRY
+BEGIN CATCH
+    IF @@TRANCOUNT > 0
+        ROLLBACK TRANSACTION;
+
+    PRINT ERROR_MESSAGE();
+END CATCH;
+GO
+
+-- Comprobar que no quedaron datos de prueba
+SELECT *
+FROM dbo.PERSONA_VETADA
+WHERE documento = '88888888';
+GO
